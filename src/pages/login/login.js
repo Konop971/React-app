@@ -1,16 +1,44 @@
-import "./login.css"
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./login.css";
 
-    function Login(){
-        return(
-            <>
-            <article>
-                <h1>Logowanie</h1>
-                <p>Podaj nazwe: <input type="text"></input></p>
-                <p>Podaj hasło: <input type="password"></input></p>
-                <button>Zaloguj</button>
-                </article>
-            </>
-        )
-    }
+function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-    export default Login;
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Email:", email, "Hasło:", password);
+    navigate("/posts");
+  };
+
+  return (
+    <>
+      <article>
+        <h1>Logowanie</h1>
+        <form onSubmit={handleSubmit}>
+          <p>
+            Podaj email:{" "}
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            ></input>
+          </p>
+          <p>
+            Podaj hasło:{" "}
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            ></input>
+          </p>
+          <input type="submit" value="Zaloguj"></input>
+        </form>
+      </article>
+    </>
+  );
+}
+
+export default Login;

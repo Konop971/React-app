@@ -1,4 +1,8 @@
-.posts{
+body {
+  margin: 0;
+  margin: 100px;
+}
+.posts {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
