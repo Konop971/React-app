@@ -5,10 +5,11 @@ import Login from "./pages/login/login";
 import PostDetail from "./pages/PostDetail/PostDetail";
 import Nav from "./components/Nav/Nav";
 import DashBoard from "./pages/DashBoard/DashBoard";
+import { ThemeProvider } from "./Context/ThemeContext";
 
 function App() {
   return (
-    <>
+    <ThemeProvider>
       <BrowserRouter>
         <Nav></Nav>
         <Routes>
@@ -19,7 +20,7 @@ function App() {
           <Route path="/DashBoard" element={<DashBoard />}></Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </ThemeProvider>
   );
 }
 

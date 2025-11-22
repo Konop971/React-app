@@ -1,9 +1,23 @@
 body {
   margin: 0;
-  margin: 100px;
+  height: 100vh;
 }
 .posts {
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
+}
+.dark {
+  background-color: rgb(53, 51, 51);
+  color: aliceblue;
+  height: 100vh;
+}
+.light {
+  background-color: aliceblue;
+  color: black;
+  height: 100vh;
+}
+#root {
+  height: 100vh;
+  margin: 0;
 }

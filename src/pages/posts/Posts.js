@@ -1,35 +1,34 @@
+import { useDispatch, useSelector } from "react-redux";
 import LikeCounter from "../../components/LikeCounter/LikeCounter";
 import "./Posts.css";
+import { useEffect } from "react";
+import { fetchPosts } from "../../Store/postsSlice";
 
 function Posts() {
+  const dispatch = useDispatch();
+  const { posts, error, status } = useSelector((state) => state.posts);
+  useEffect(() => {
+    if (status == "idle") {
+      dispatch(fetchPosts());
+    }
+  }, [status, dispatch]);
   return (
     <>
       <article>
         <h1>Latest Posts</h1>
-        <div className="container">
-          <div className="posts">
-            <LikeCounter
-              title="1. Pierwszy post"
-              description="Opis naszego artykulu"
-              count="5"
-              bgcolor="lightblue"
-              autor="Jakis Pan1"
-            ></LikeCounter>
-            <LikeCounter
-              title="2. Pierwszy post"
-              description="Opis naszego artykulu"
-              count="16"
-              bgcolor="lightgreen"
-              autor="Jakis Pan2"
-            ></LikeCounter>
-            <LikeCounter
-              title="3. Pierwszy post"
-              description="Opis naszego artykulu"
-              count="3"
-              bgcolor="lightpink"
-              autor="Jakis Pan3"
-            ></LikeCounter>
-          </div>
+        <div className="posts">
+          {status == "loading" && <p>Ładowanie...</p>}
+          {status == "failed" && <p>Błąd: {error}</p>}
+          {status == "succeeded" &&
+            posts.map((post) => (
+              <LikeCounter
+                title={post.title}
+                description={post.body}
+                count="5"
+                bgcolor=""
+                key={post.id}
+              ></LikeCounter>
+            ))}
         </div>
       </article>
       <div className="duuzy"></div>
